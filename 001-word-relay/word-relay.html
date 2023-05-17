@@ -12,22 +12,25 @@
     <input type="text">
     <button>입력</button>
     <script>
-        const number = Number(prompt('참가 인원을 입력하세요.'));
+        const participants = Number(prompt('참가 인원을 입력하세요.'));
+
+        // input이나 button은 html 태그이므로 자바스크립트에서 가져와야 함 (선택).
+        // 태그를 저장하는 변수명은 $로 시작 (선택한 태그 저장)
         const $button = document.querySelector('button');
         const $input = document.querySelector('input');
         const $word = document.querySelector('#word');
         const $order = document.querySelector('#order');
 
-        let word;                           // 제시어
-        let newWord;                        // 현재 단어
+        let word;       // 제시어
+        let newWord;    // 현재 단어
 
         const onClickButton = () => {
             // 제시어가 비어 있거나 올바른 단어인가?
             if(!word || word[word.length - 1] === newWord[0]){
-                word = newWord;             // 입력 단어가 제시어가 됨
-                $word.textContent = word;   // 화면에 제시어 표시
+                word = newWord;                 // 입력 단어가 제시어가 됨
+                $word.textContent = word;       // 화면에 제시어 표시
                 const order = Number($order.textContent);
-                if(order + 1 > number){
+                if(order + 1 > participants){
                     $order.textContent = 1;
                 } else{
                     $order.textContent = order + 1;
@@ -40,7 +43,7 @@
         };
 
         const onInput = (event) => {
-            newWord = event.target.value;   // 입력 단어를 현재 단어가 됨
+            newWord = event.target.value;       // 입력 단어를 현재 단어가 됨
         };
 
         $button.addEventListener('click', onClickButton);
